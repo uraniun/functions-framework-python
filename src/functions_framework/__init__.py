@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import functools
 import importlib.util
 import os.path
 import pathlib
@@ -60,6 +59,32 @@ class _Event(object):
         self.data = data
 
 
+class _PubSubPushEvent(object):
+    """Event passed to background functions."""
+
+    # Supports both v1beta1 and v1beta2 event formats.
+    def __init__(
+        self,
+        context=None,
+        subscription="",
+        message={},
+        eventId="",
+        timestamp="",
+        eventType="",
+        resource="",
+        **kwargs
+    ):
+        self.context = context
+        if not self.context:
+            self.context = {
+                "eventId": eventId,
+                "timestamp": timestamp,
+                "eventType": eventType,
+                "resource": resource,
+            }
+        self.data = {"subscription": subscription, **message}
+
+
 def _http_view_func_wrapper(function, request):
     def view_func(path):
         return function(request._get_current_object())
@@ -74,6 +99,11 @@ def _is_binary_cloud_event(request):
         and request.headers.get("ce-source")
         and request.headers.get("ce-id")
     )
+
+
+def _is_pub_sub_message(request):
+    data = request.get_json()
+    return "subscription" in data
 
 
 def _event_view_func_wrapper(function, request):
@@ -95,7 +125,10 @@ def _event_view_func_wrapper(function, request):
             event_data = request.get_json()
             if not event_data:
                 flask.abort(400)
-            event_object = _Event(**event_data)
+            if _is_pub_sub_message(request):
+                event_object = _PubSubPushEvent(**event_data)
+            else:
+                event_object = _Event(**event_data)
             data = event_object.data
             context = Context(**event_object.context)
             function(data, context)
