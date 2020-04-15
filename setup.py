@@ -25,7 +25,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="functions-framework",
-    version="1.2.0",
+    version="1.3.0",
     description="An open source FaaS (Function as a service) framework for writing portable Python functions -- brought to you by the Google Cloud Functions team.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -51,9 +51,9 @@ setup(
     extras_require={"test": ["pytest", "tox"]},
     entry_points={
         "console_scripts": [
-            "functions-framework=functions_framework.cli:cli",
-            "functions_framework=functions_framework.cli:cli",
-            "ff=functions_framework.cli:cli",
+            "functions-framework=functions_framework._cli:_cli",
+            "functions_framework=functions_framework._cli:_cli",
+            "ff=functions_framework._cli:_cli",
         ]
     },
 )

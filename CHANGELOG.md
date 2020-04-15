@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2020-04-13
+- Add support for running `python -m functions_framework` ([#31])
+- Move `functions_framework.cli.cli` to `functions_framework._cli._cli`
+- Adjust path handling for robots.txt and favicon.ico ([#33])
+
 ## [1.2.0] - 2020-02-20
 ### Added
 - Add support for `--host` flag ([#20])
@@ -35,12 +40,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/GoogleCloudPlatform/functions-framework-python/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/GoogleCloudPlatform/functions-framework-python/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/GoogleCloudPlatform/functions-framework-python/releases/tag/v1.3.0
 [1.2.0]: https://github.com/GoogleCloudPlatform/functions-framework-python/releases/tag/v1.2.0
 [1.1.1]: https://github.com/GoogleCloudPlatform/functions-framework-python/releases/tag/v1.1.1
 [1.0.1]: https://github.com/GoogleCloudPlatform/functions-framework-python/releases/tag/v1.0.1
 [1.0.0]: https://github.com/GoogleCloudPlatform/functions-framework-python/releases/tag/v1.0.0
 
+[#33]: https://github.com/GoogleCloudPlatform/functions-framework-python/pull/33
+[#31]: https://github.com/GoogleCloudPlatform/functions-framework-python/pull/31
 [#20]: https://github.com/GoogleCloudPlatform/functions-framework-python/pull/20
 [#14]: https://github.com/GoogleCloudPlatform/functions-framework-python/pull/14
 [#12]: https://github.com/GoogleCloudPlatform/functions-framework-python/pull/12

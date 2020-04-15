@@ -1,6 +1,3 @@
+from functions_framework._cli import _cli
 
-
-if __name__ == "__main__":
-    from .cli import cli
-
-    cli()
+_cli(prog_name="python -m functions_framework")
